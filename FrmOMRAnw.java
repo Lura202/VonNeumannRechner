@@ -1,12 +1,11 @@
 import java.awt.*;
 import java.awt.event.*;
-import je.util.Turtle;
 
 /**
   *
   * Beschreibung
   *
-  * @version 0.2 vom 05.01.2018
+  * @version 0.3 vom 06.01.2018
   * @Lukas Rang
   */
 
@@ -18,48 +17,19 @@ public class FrmOMRAnw extends Frame {
   private int Adressbus;
   private String zZyklus;
   private String zOpcode;
-  private Image img;
+  private int zAdresse;
    
   private Button btRechnerStart = new Button();
   private Button btRechnerStopp = new Button();
-  private Button btBefehlholen = new Button();
+  private Button btZyklus = new Button();
   
-  public TextField tfHR = new TextField();
-  private TextField tfAkku = new TextField();
-  private TextField tfALU = new TextField();
-  private TextField tfN = new TextField();
-  private TextField tfZ = new TextField();
-  protected TextField tfBR = new TextField();
-  private TextField tfBZR = new TextField();
-  private TextField tfeingabeRegister = new TextField();
-  private TextField tfausgabeRegister = new TextField();
-  private TextField tfSR = new TextField();
-  private TextField tfSAR = new TextField();
   private TextField tfDekodierung = new TextField();
   
-  private Label lbHilfsregister = new Label();
-  private Label lbAkku = new Label();
-  private Label lbEingaberegister = new Label();
-  private Label lbAusgaberegister = new Label();
-  private Label lbER = new Label();
-  private Label lbAR = new Label();
-  private Label lbSR = new Label();
-  private Label lbBR = new Label();
-  private Label lbBZR = new Label();
-  private Label lbPlus1 = new Label();
-  private Label lbALU = new Label();
-  private Label lbZ = new Label();
-  private Label lbN = new Label();
   private Label lbDekodierung = new Label();
-  private Label lbOpCode = new Label();
-  private Label lbAdresse = new Label();
   
-  private TextArea taBefehlFenster = new TextArea("", 1, 1, TextArea.SCROLLBARS_VERTICAL_ONLY);
-  
-  private Label lbSAR = new Label();
   // Ende Attribute
   
-  public FrmOMRAnw() { 
+  public FrmOMRAnw(){ 
     // Frame-Initialisierung
     super();
     addWindowListener(new WindowAdapter() {
@@ -89,70 +59,6 @@ public class FrmOMRAnw extends Frame {
     btRechnerStart.setFont(new Font("Dialog", Font.PLAIN, 16));
     cp.add(btRechnerStart);
     
-    tfHR.setBounds(50, 70, 120, 30);
-    tfHR.setFont(new Font("Dialog", Font.PLAIN, 20));
-    tfHR.setEditable(false);
-    tfHR.setEnabled(true);
-    cp.add(tfHR);
-    
-    tfAkku.setBounds(200, 70, 120, 30);
-    tfAkku.setFont(new Font("Dialog", Font.PLAIN, 20));
-    tfAkku.setEnabled(true);
-    tfAkku.setEditable(false);
-    cp.add(tfAkku);
-    
-    tfALU.setBounds(145, 165, 80, 30);
-    tfALU.setFont(new Font("Dialog", Font.PLAIN, 20));
-    tfALU.setEnabled(true);
-    tfALU.setEditable(false);
-    cp.add(tfALU);
-    
-    tfN.setBounds(65, 190, 30, 30);
-    tfN.setFont(new Font("Dialog", Font.PLAIN, 20));
-    tfN.setEnabled(true);
-    tfN.setEditable(false);
-    cp.add(tfN);
-    
-    tfZ.setBounds(30, 190, 30, 30);
-    tfZ.setFont(new Font("Dialog", Font.PLAIN, 20));
-    tfZ.setEditable(false);
-    tfZ.setEnabled(true);
-    cp.add(tfZ);
-    
-    tfBR.setBounds(384, 70, 185, 30);
-    tfBR.setFont(new Font("Dialog", Font.PLAIN, 20));
-    tfBR.setEditable(false);
-    tfBR.setEnabled(true);
-    cp.add(tfBR);
-    
-    tfBZR.setBounds(450, 275, 120, 30);
-    tfBZR.setFont(new Font("Dialog", Font.PLAIN, 20));
-    tfBZR.setEditable(false);
-    tfBZR.setEnabled(true);
-    cp.add(tfBZR);
-    
-    tfeingabeRegister.setBounds(650, 432, 120, 30);
-    tfeingabeRegister.setFont(new Font("Dialog", Font.PLAIN, 20));
-    cp.add(tfeingabeRegister);
-    
-    tfausgabeRegister.setBounds(800, 432, 120, 30);
-    tfausgabeRegister.setFont(new Font("Dialog", Font.PLAIN, 20));
-    tfausgabeRegister.setEditable(false);
-    tfausgabeRegister.setEnabled(true);
-    cp.add(tfausgabeRegister);
-    
-    tfSR.setBounds(725, 70, 120, 30);
-    tfSR.setFont(new Font("Dialog", Font.PLAIN, 20));
-    tfSR.setEditable(false);
-    tfSR.setEnabled(true);
-    cp.add(tfSR);
-    
-    tfSAR.setBounds(650, 360, 120, 30);
-    tfSAR.setFont(new Font("Dialog", Font.PLAIN, 20));
-    tfSAR.setEditable(false);
-    tfSAR.setEnabled(true);
-    cp.add(tfSAR);
-    
     btRechnerStopp.setBounds(25, 467, 120, 30);
     btRechnerStopp.setLabel("Rechner Stopp");
     btRechnerStopp.addActionListener(new ActionListener() { 
@@ -165,100 +71,182 @@ public class FrmOMRAnw extends Frame {
     btRechnerStopp.setEnabled(false);
     cp.add(btRechnerStopp);
     
-    btBefehlholen.setBounds(160, 432, 120, 65);
-    btBefehlholen.setLabel("Befehl holen");
-    btBefehlholen.addActionListener(new ActionListener() { 
+    btZyklus.setBounds(160, 432, 120, 65);
+    btZyklus.setLabel("Befehl holen");
+    btZyklus.addActionListener(new ActionListener() { 
     public void actionPerformed(ActionEvent evt) { 
-    btBefehlholen_ActionPerformed(evt);
+    btZyklus_ActionPerformed(evt);
     }
     });
     
-    btBefehlholen.setFont(new Font("Dialog", Font.PLAIN, 16));
-    btBefehlholen.setEnabled(false);
-    cp.add(btBefehlholen);
+    btZyklus.setFont(new Font("Dialog", Font.PLAIN, 16));
+    btZyklus.setEnabled(false);
+    cp.add(btZyklus);
     
-    taBefehlFenster.setBounds(710, 110, 155, 207);
-    taBefehlFenster.setEnabled(true);
-    taBefehlFenster.setFont(new Font("Dialog", Font.PLAIN, 20));
-    cp.add(taBefehlFenster);
+    Rechenwerk.tfHR.setBounds(50, 70, 120, 30);
+    Rechenwerk.tfHR.setFont(new Font("Dialog", Font.PLAIN, 20));
+    Rechenwerk.tfHR.setEditable(false);
+    Rechenwerk.tfHR.setEnabled(true);
+    cp.add(Rechenwerk.tfHR);
     
-    lbHilfsregister.setBounds(50, 35, 72, 30);
-    lbHilfsregister.setText("Hilfsregister");
-    lbHilfsregister.setAlignment(Label.CENTER);
-    lbHilfsregister.setFont(new Font("Dialog", Font.PLAIN, 13));
-    cp.add(lbHilfsregister);
+    Rechenwerk.tfAkku.setBounds(200, 70, 120, 30);
+    Rechenwerk.tfAkku.setFont(new Font("Dialog", Font.PLAIN, 20));
+    Rechenwerk.tfAkku.setEnabled(true);
+    Rechenwerk.tfAkku.setEditable(false);
+    cp.add(Rechenwerk.tfAkku);
     
-    lbAkku.setBounds(200, 35, 60, 30);
-    lbAkku.setText("Akku");
-    lbAkku.setFont(new Font("Dialog", Font.PLAIN, 13));
-    lbAkku.setAlignment(Label.CENTER);
-    cp.add(lbAkku);
+    Rechenwerk.tfALU.setBounds(145, 165, 80, 30);
+    Rechenwerk.tfALU.setFont(new Font("Dialog", Font.PLAIN, 20));
+    Rechenwerk.tfALU.setEnabled(true);
+    Rechenwerk.tfALU.setEditable(false);
+    cp.add(Rechenwerk.tfALU);
     
-    lbEingaberegister.setBounds(650, 472, 120, 30);
-    lbEingaberegister.setText("Eingaberegister");
-    lbEingaberegister.setFont(new Font("Dialog", Font.PLAIN, 13));
-    lbEingaberegister.setAlignment(Label.CENTER);
-    cp.add(lbEingaberegister);
+    Rechenwerk.tfN.setBounds(65, 190, 30, 30);
+    Rechenwerk.tfN.setFont(new Font("Dialog", Font.PLAIN, 20));
+    Rechenwerk.tfN.setEnabled(true);
+    Rechenwerk.tfN.setEditable(false);
+    cp.add(Rechenwerk.tfN);
     
-    lbAusgaberegister.setBounds(800, 470, 120, 30);
-    lbAusgaberegister.setText("text");
-    lbAusgaberegister.setFont(new Font("Dialog", Font.PLAIN, 13));
-    lbAusgaberegister.setAlignment(Label.CENTER);
-    cp.add(lbAusgaberegister);
+    Rechenwerk.tfZ.setBounds(30, 190, 30, 30);
+    Rechenwerk.tfZ.setFont(new Font("Dialog", Font.PLAIN, 20));
+    Rechenwerk.tfZ.setEditable(false);
+    Rechenwerk.tfZ.setEnabled(true);
+    cp.add(Rechenwerk.tfZ);
     
-    lbER.setBounds(650, 397, 30, 30);
-    lbER.setText("ER");
-    lbER.setFont(new Font("Dialog", Font.BOLD, 14));
-    lbER.setAlignment(Label.CENTER);
-    cp.add(lbER);
+    Rechenwerk.lbHR.setBounds(50, 35, 72, 30);
+    Rechenwerk.lbHR.setText("HR");
+    Rechenwerk.lbHR.setAlignment(Label.CENTER);
+    Rechenwerk.lbHR.setFont(new Font("Dialog", Font.PLAIN, 13));
+    cp.add(Rechenwerk.lbHR);
     
-    lbAR.setBounds(800, 397, 30, 30);
-    lbAR.setText("AR");
-    lbAR.setFont(new Font("Dialog", Font.BOLD, 14));
-    lbAR.setAlignment(Label.CENTER);
-    cp.add(lbAR);
+    Rechenwerk.lbAkku.setBounds(200, 35, 60, 30);
+    Rechenwerk.lbAkku.setText("Akku");
+    Rechenwerk.lbAkku.setFont(new Font("Dialog", Font.PLAIN, 13));
+    Rechenwerk.lbAkku.setAlignment(Label.CENTER);
+    cp.add(Rechenwerk.lbAkku);
     
-    lbSR.setBounds(725, 35, 30, 30);
-    lbSR.setText("SR");
-    lbSR.setAlignment(Label.CENTER);
-    lbSR.setFont(new Font("Dialog", Font.BOLD, 14));
-    cp.add(lbSR);
+    Rechenwerk.lbALU.setBounds(165, 200, 60, 30);
+    Rechenwerk.lbALU.setText("ALU");
+    Rechenwerk.lbALU.setFont(new Font("Dialog", Font.PLAIN, 13));
+    Rechenwerk.lbALU.setAlignment(Label.CENTER);
+    cp.add(Rechenwerk.lbALU);
     
-    lbBR.setBounds(385, 35, 30, 30);
-    lbBR.setText("BR");
-    lbBR.setFont(new Font("Dialog", Font.BOLD, 14));
-    lbBR.setAlignment(Label.CENTER);
-    cp.add(lbBR);
+    Rechenwerk.lbZ.setBounds(30, 155, 30, 30);
+    Rechenwerk.lbZ.setText("Z");
+    Rechenwerk.lbZ.setAlignment(Label.CENTER);
+    Rechenwerk.lbZ.setFont(new Font("Dialog", Font.BOLD, 14));
+    cp.add(Rechenwerk.lbZ);
     
-    lbBZR.setBounds(450, 240, 30, 30);
-    lbBZR.setText("BZR");
-    lbBZR.setAlignment(Label.CENTER);
-    lbBZR.setFont(new Font("Dialog", Font.BOLD, 14));
-    cp.add(lbBZR);
+    Rechenwerk.lbN.setBounds(65, 155, 30, 30);
+    Rechenwerk.lbN.setText("N");
+    Rechenwerk.lbN.setAlignment(Label.CENTER);
+    Rechenwerk.lbN.setFont(new Font("Dialog", Font.BOLD, 14));
+    cp.add(Rechenwerk.lbN);
     
-    lbPlus1.setBounds(575, 275, 30, 30);
-    lbPlus1.setText("+1");
-    lbPlus1.setFont(new Font("Dialog", Font.BOLD, 14));
-    lbPlus1.setAlignment(Label.CENTER);
-    cp.add(lbPlus1);
+    Steuerwerk.tfBR.setBounds(384, 70, 185, 30);
+    Steuerwerk.tfBR.setFont(new Font("Dialog", Font.PLAIN, 20));
+    Steuerwerk.tfBR.setEditable(false);
+    Steuerwerk.tfBR.setEnabled(true);
+    cp.add(Steuerwerk.tfBR);
     
-    lbALU.setBounds(165, 200, 60, 30);
-    lbALU.setText("ALU");
-    lbALU.setFont(new Font("Dialog", Font.PLAIN, 13));
-    lbALU.setAlignment(Label.CENTER);
-    cp.add(lbALU);
+    Steuerwerk.tfBZR.setBounds(450, 275, 120, 30);
+    Steuerwerk.tfBZR.setFont(new Font("Dialog", Font.PLAIN, 20));
+    Steuerwerk.tfBZR.setEditable(false);
+    Steuerwerk.tfBZR.setEnabled(true);
+    cp.add(Steuerwerk.tfBZR);
     
-    lbZ.setBounds(30, 155, 30, 30);
-    lbZ.setText("Z");
-    lbZ.setAlignment(Label.CENTER);
-    lbZ.setFont(new Font("Dialog", Font.BOLD, 14));
-    cp.add(lbZ);
+    Steuerwerk.lbBR.setBounds(385, 35, 30, 30);
+    Steuerwerk.lbBR.setText("BR");
+    Steuerwerk.lbBR.setFont(new Font("Dialog", Font.BOLD, 14));
+    Steuerwerk.lbBR.setAlignment(Label.CENTER);
+    cp.add(Steuerwerk.lbBR);
     
-    lbN.setBounds(65, 155, 30, 30);
-    lbN.setText("N");
-    lbN.setAlignment(Label.CENTER);
-    lbN.setFont(new Font("Dialog", Font.BOLD, 14));
-    cp.add(lbN);
+    Steuerwerk.lbBZR.setBounds(450, 240, 30, 30);
+    Steuerwerk.lbBZR.setText("BZR");
+    Steuerwerk.lbBZR.setAlignment(Label.CENTER);
+    Steuerwerk.lbBZR.setFont(new Font("Dialog", Font.BOLD, 14));
+    cp.add(Steuerwerk.lbBZR);
+    
+    Steuerwerk.lbPlus1.setBounds(575, 275, 30, 30);
+    Steuerwerk.lbPlus1.setText("+1");
+    Steuerwerk.lbPlus1.setFont(new Font("Dialog", Font.BOLD, 14));
+    Steuerwerk.lbPlus1.setAlignment(Label.CENTER);
+    cp.add(Steuerwerk.lbPlus1);
+    
+    Steuerwerk.lbOpCode.setBounds(385, 105, 60, 30);
+    Steuerwerk.lbOpCode.setText("OpCode");
+    Steuerwerk.lbOpCode.setFont(new Font("Dialog", Font.PLAIN, 13));
+    Steuerwerk.lbOpCode.setAlignment(Label.CENTER);
+    cp.add(Steuerwerk.lbOpCode);
+                                                                         
+    Steuerwerk.lbAdresse.setBounds(505, 105, 60, 30);
+    Steuerwerk.lbAdresse.setText("Adresse");
+    Steuerwerk.lbAdresse.setFont(new Font("Dialog", Font.PLAIN, 13));
+    Steuerwerk.lbAdresse.setAlignment(Label.CENTER);
+    cp.add(Steuerwerk.lbAdresse);
+    
+    Speicherwerk.tfSR.setBounds(725, 70, 120, 30);
+    Speicherwerk.tfSR.setFont(new Font("Dialog", Font.PLAIN, 20));
+    Speicherwerk.tfSR.setEditable(false);
+    Speicherwerk.tfSR.setEnabled(true);
+    cp.add(Speicherwerk.tfSR);
+    
+    Speicherwerk.tfSAR.setBounds(650, 360, 120, 30);
+    Speicherwerk.tfSAR.setFont(new Font("Dialog", Font.PLAIN, 20));
+    Speicherwerk.tfSAR.setEditable(false);
+    Speicherwerk.tfSAR.setEnabled(true);
+    cp.add(Speicherwerk.tfSAR);
+    
+    Speicherwerk.taBefehlFenster.setBounds(710, 110, 155, 207);
+    Speicherwerk.taBefehlFenster.setEnabled(true);
+    Speicherwerk.taBefehlFenster.setFont(new Font("Dialog", Font.PLAIN, 20));
+    cp.add(Speicherwerk.taBefehlFenster);
+    
+    Speicherwerk.lbSR.setBounds(725, 35, 30, 30);
+    Speicherwerk.lbSR.setText("SR");
+    Speicherwerk.lbSR.setAlignment(Label.CENTER);
+    Speicherwerk.lbSR.setFont(new Font("Dialog", Font.BOLD, 14));
+    cp.add(Speicherwerk.lbSR);
+    
+    Speicherwerk.lbSAR.setBounds(735, 325, 32, 30);
+    Speicherwerk.lbSAR.setText("SAR");
+    Speicherwerk.lbSAR.setAlignment(Label.CENTER);
+    Speicherwerk.lbSAR.setFont(new Font("Dialog", Font.BOLD, 14));
+    cp.add(Speicherwerk.lbSAR);
+    
+    IOWerk.tfeingabeRegister.setBounds(650, 432, 120, 30);
+    IOWerk.tfeingabeRegister.setFont(new Font("Dialog", Font.PLAIN, 20));
+    cp.add(IOWerk.tfeingabeRegister);
+    
+    IOWerk.tfausgabeRegister.setBounds(800, 432, 120, 30);
+    IOWerk.tfausgabeRegister.setFont(new Font("Dialog", Font.PLAIN, 20));
+    IOWerk.tfausgabeRegister.setEditable(false);
+    IOWerk.tfausgabeRegister.setEnabled(true);
+    cp.add(IOWerk.tfausgabeRegister);
+    
+    IOWerk.lbEingaberegister.setBounds(650, 472, 120, 30);
+    IOWerk.lbEingaberegister.setText("Eingaberegister");
+    IOWerk.lbEingaberegister.setFont(new Font("Dialog", Font.PLAIN, 13));
+    IOWerk.lbEingaberegister.setAlignment(Label.CENTER);
+    cp.add(IOWerk.lbEingaberegister);
+    
+    IOWerk.lbAusgaberegister.setBounds(800, 470, 120, 30);
+    IOWerk.lbAusgaberegister.setText("text");
+    IOWerk.lbAusgaberegister.setFont(new Font("Dialog", Font.PLAIN, 13));
+    IOWerk.lbAusgaberegister.setAlignment(Label.CENTER);
+    cp.add(IOWerk.lbAusgaberegister);
+    
+    IOWerk.lbER.setBounds(650, 397, 30, 30);
+    IOWerk.lbER.setText("ER");
+    IOWerk.lbER.setFont(new Font("Dialog", Font.BOLD, 14));
+    IOWerk.lbER.setAlignment(Label.CENTER);
+    cp.add(IOWerk.lbER);
+    
+    IOWerk.lbAR.setBounds(800, 397, 30, 30);
+    IOWerk.lbAR.setText("AR");
+    IOWerk.lbAR.setFont(new Font("Dialog", Font.BOLD, 14));
+    IOWerk.lbAR.setAlignment(Label.CENTER);
+    cp.add(IOWerk.lbAR);
     
     tfDekodierung.setBounds(320, 432, 275, 65);
     tfDekodierung.setCaretPosition(0);
@@ -275,24 +263,6 @@ public class FrmOMRAnw extends Frame {
     lbDekodierung.setEnabled(true);
     cp.add(lbDekodierung);
     
-    lbOpCode.setBounds(385, 105, 60, 30);
-    lbOpCode.setText("OpCode");
-    lbOpCode.setFont(new Font("Dialog", Font.PLAIN, 13));
-    lbOpCode.setAlignment(Label.CENTER);
-    cp.add(lbOpCode);
-    
-    lbAdresse.setBounds(505, 105, 60, 30);
-    lbAdresse.setText("Adresse");
-    lbAdresse.setFont(new Font("Dialog", Font.PLAIN, 13));
-    lbAdresse.setAlignment(Label.CENTER);
-    cp.add(lbAdresse);
-    
-    lbSAR.setBounds(735, 325, 32, 30);
-    lbSAR.setText("SAR");
-    lbSAR.setAlignment(Label.CENTER);
-    lbSAR.setFont(new Font("Dialog", Font.BOLD, 14));
-    cp.add(lbSAR);
-    
     cp.setBackground(Color.WHITE);
     
     // Ende Komponenten
@@ -307,52 +277,61 @@ public class FrmOMRAnw extends Frame {
     new FrmOMRAnw();
   } // end of main
   
-  /***************************** Hilfsmethoden ********************************/
+  /***************************** Anfang Hilfsmethoden *************************/
   
   public void reset(){
-    Rechenwerk re = new Rechenwerk();
-    re.reset();  // Da "reset()" keine statische Methode ist, wird die Methode wie dargestellt aufgerufen anstatt mit "Rechenwerk.reset();"
-    Steuerwerk st = new Steuerwerk();
-    st.reset();  // Da "reset()" keine statische Methode ist, wird die Methode wie dargestellt aufgerufen anstatt mit "Steuerwerk.reset();"
-    Speicherwerk sp = new Speicherwerk();
-    sp.reset();  // Da "reset()" keine statische Methode ist, wird die Methode wie dargestellt aufgerufen anstatt mit "Speicherwerk.reset();"
-    IOWerk io = new IOWerk();
-    io.reset();  // Da "reset()" keine statische Methode ist, wird die Methode wie dargestellt aufgerufen anstatt mit "IOWerk.reset();"
+    Rechenwerk.reset();  
+    Steuerwerk.reset();  
+    Speicherwerk.reset();  
+    IOWerk.reset(); 
   }
   
   /***************************** Ende Hilfsmethoden ***************************/
   
-  /***************************** Ereignissteuerung ****************************/
+  /***************************** Anfang Ereignissteuerung *********************/
   
-  public void rechnerstart(){
-    btRechnerStart.setEnabled(false);
+  public void rechnerStart(){
+    btRechnerStart.setEnabled(false); // verhindert das man den "Rechner Start" Knopf mehrmals hintereinander drücken kann.
     btRechnerStopp.setEnabled(true);
-    btBefehlholen.setEnabled(true);
+    btZyklus.setEnabled(true);
     reset();
   }
   
-  public void rechnerstopp(){
-    btRechnerStart.setEnabled(true);
+  public void rechnerStopp(){
+    btRechnerStart.setEnabled(true);                                                          
     btRechnerStopp.setEnabled(false);
-    btBefehlholen.setEnabled(false);
+    btZyklus.setEnabled(false);
   }
   
-  /***************************** Ende Ereignissteurung ************************/
+
   
+  public void mainZyklus(){
+    if(btZyklus.getLabel().equals("Befehl holen") == true){
+      btZyklus.setLabel("Befehl Dekodieren");
+      // BZR -> SAR
+      //zAdresse = Integer.parseInt(tfBZR.getText());
+      //Speicherwerk.SetSAR(zAdresse);
+    }
+    else{
+      
+    } 
+  } 
+    
+    /***************************** Ende Ereignissteurung ************************/
+    
   public void btRechnerStart_ActionPerformed(ActionEvent evt) {
-    rechnerstart();
+    rechnerStart();
   } // end of btRechnerStart_ActionPerformed
     
   public void btRechnerStopp_ActionPerformed(ActionEvent evt) {
-    rechnerstopp();
+    rechnerStopp();
   } // end of btRechnerStopp_ActionPerformed
     
-  public void btBefehlholen_ActionPerformed(ActionEvent evt) {
-    // TODO hier Quelltext einfügen
+  public void btZyklus_ActionPerformed(ActionEvent evt) {
+    mainZyklus();
+  } // end of btZyklus_ActionPerformed
     
-  } // end of btBefehlholen_ActionPerformed
+    // Ende Methoden
     
-  // Ende Methoden
-
 } // end of class VonNeumannProjekt
   

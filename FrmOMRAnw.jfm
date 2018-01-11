@@ -1,6 +1,6 @@
 object FrmOMRAnw: TFGUIForm
-  Left = 25
-  Top = 9
+  Left = 0
+  Top = 0
   BorderIcons = [biSystemMenu]
   Caption = 'Modellrechner OMR 1.0 (Java)'
   ClientHeight = 561
@@ -247,7 +247,7 @@ object FrmOMRAnw: TFGUIForm
     Text = 'Rechner Stopp'
     actionPerformed = 'btRechnerStopp_ActionPerformed'
   end
-  object btBefehlholen: TAButton
+  object btZyklus: TAButton
     Tag = -4
     Left = 160
     Top = 432
@@ -263,7 +263,7 @@ object FrmOMRAnw: TFGUIForm
     Background = 15658734
     Enabled = False
     Text = 'Befehl holen'
-    actionPerformed = 'btBefehlholen_ActionPerformed'
+    actionPerformed = 'btZyklus_ActionPerformed'
   end
   object taBefehlFenster: TATextArea
     Tag = -3
@@ -283,7 +283,7 @@ object FrmOMRAnw: TFGUIForm
     Scrollbars = VERTICAL_ONLY
     Editable = True
   end
-  object lbHilfsregister: TALabel
+  object lbHR: TALabel
     Tag = -1
     Left = 50
     Top = 35
@@ -298,7 +298,7 @@ object FrmOMRAnw: TFGUIForm
     Foreground = clWindowText
     Background = clBtnFace
     Alignment = CENTER
-    Text = 'Hilfsregister'
+    Text = 'HR'
   end
   object lbAkku: TALabel
     Tag = -1
