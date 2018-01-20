@@ -251,7 +251,7 @@ object FrmOMRAnw: TFGUIForm
     Tag = -4
     Left = 160
     Top = 432
-    Width = 120
+    Width = 145
     Height = 65
     Hint = 'button1'
     Font.Charset = DEFAULT_CHARSET
@@ -518,7 +518,7 @@ object FrmOMRAnw: TFGUIForm
     Font.Name = 'Dialog'
     Font.Style = []
     Foreground = 3355443
-    Background = clWhite
+    Background = clBtnFace
     Editable = False
   end
   object lbDekodierung: TALabel

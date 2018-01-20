@@ -14,13 +14,9 @@ public class IOWerk{
   
   //Ende Attribute
   
-  /***************************** Anfang Hilfsmethoden *************************/
-  
   public static void reset(){
     tfeingabeRegister.setText("0");
     tfausgabeRegister.setText("0");
   }
-  
-  /***************************** Ende Hilfsmethoden ***************************/
    
 }

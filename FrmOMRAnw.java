@@ -58,6 +58,7 @@ public class FrmOMRAnw extends Frame {
     
     btRechnerStart.setFont(new Font("Dialog", Font.PLAIN, 16));
     cp.add(btRechnerStart);
+    btRechnerStart.setFocusable(false);
     
     btRechnerStopp.setBounds(25, 467, 120, 30);
     btRechnerStopp.setLabel("Rechner Stopp");
@@ -70,8 +71,9 @@ public class FrmOMRAnw extends Frame {
     btRechnerStopp.setFont(new Font("Dialog", Font.PLAIN, 16));
     btRechnerStopp.setEnabled(false);
     cp.add(btRechnerStopp);
+    btRechnerStopp.setFocusable(false);
     
-    btZyklus.setBounds(160, 432, 120, 65);
+    btZyklus.setBounds(160, 432, 145, 65);
     btZyklus.setLabel("Befehl holen");
     btZyklus.addActionListener(new ActionListener() { 
     public void actionPerformed(ActionEvent evt) { 
@@ -82,36 +84,42 @@ public class FrmOMRAnw extends Frame {
     btZyklus.setFont(new Font("Dialog", Font.PLAIN, 16));
     btZyklus.setEnabled(false);
     cp.add(btZyklus);
-    
+    btZyklus.setFocusable(false);
+   
     Rechenwerk.tfHR.setBounds(50, 70, 120, 30);
     Rechenwerk.tfHR.setFont(new Font("Dialog", Font.PLAIN, 20));
     Rechenwerk.tfHR.setEditable(false);
     Rechenwerk.tfHR.setEnabled(true);
     cp.add(Rechenwerk.tfHR);
+    Rechenwerk.tfHR.setFocusable(false);
     
     Rechenwerk.tfAkku.setBounds(200, 70, 120, 30);
     Rechenwerk.tfAkku.setFont(new Font("Dialog", Font.PLAIN, 20));
     Rechenwerk.tfAkku.setEnabled(true);
     Rechenwerk.tfAkku.setEditable(false);
-    cp.add(Rechenwerk.tfAkku);
+    cp.add(Rechenwerk.tfAkku);                                                                              
+    Rechenwerk.tfAkku.setFocusable(false);
     
     Rechenwerk.tfALU.setBounds(145, 165, 80, 30);
     Rechenwerk.tfALU.setFont(new Font("Dialog", Font.PLAIN, 20));
     Rechenwerk.tfALU.setEnabled(true);
     Rechenwerk.tfALU.setEditable(false);
     cp.add(Rechenwerk.tfALU);
+    Rechenwerk.tfALU.setFocusable(false);
     
     Rechenwerk.tfN.setBounds(65, 190, 30, 30);
     Rechenwerk.tfN.setFont(new Font("Dialog", Font.PLAIN, 20));
     Rechenwerk.tfN.setEnabled(true);
     Rechenwerk.tfN.setEditable(false);
     cp.add(Rechenwerk.tfN);
+    Rechenwerk.tfN.setFocusable(false);
     
     Rechenwerk.tfZ.setBounds(30, 190, 30, 30);
     Rechenwerk.tfZ.setFont(new Font("Dialog", Font.PLAIN, 20));
     Rechenwerk.tfZ.setEditable(false);
     Rechenwerk.tfZ.setEnabled(true);
     cp.add(Rechenwerk.tfZ);
+    Rechenwerk.tfZ.setFocusable(false);
     
     Rechenwerk.lbHR.setBounds(50, 35, 72, 30);
     Rechenwerk.lbHR.setText("HR");
@@ -154,12 +162,14 @@ public class FrmOMRAnw extends Frame {
     Steuerwerk.tfBZR.setEditable(false);
     Steuerwerk.tfBZR.setEnabled(true);
     cp.add(Steuerwerk.tfBZR);
+    Steuerwerk.tfBZR.setFocusable(false);
     
     Steuerwerk.lbBR.setBounds(385, 35, 30, 30);
     Steuerwerk.lbBR.setText("BR");
     Steuerwerk.lbBR.setFont(new Font("Dialog", Font.BOLD, 14));
     Steuerwerk.lbBR.setAlignment(Label.CENTER);
     cp.add(Steuerwerk.lbBR);
+    Steuerwerk.tfBR.setFocusable(false);
     
     Steuerwerk.lbBZR.setBounds(450, 240, 30, 30);
     Steuerwerk.lbBZR.setText("BZR");
@@ -178,7 +188,7 @@ public class FrmOMRAnw extends Frame {
     Steuerwerk.lbOpCode.setFont(new Font("Dialog", Font.PLAIN, 13));
     Steuerwerk.lbOpCode.setAlignment(Label.CENTER);
     cp.add(Steuerwerk.lbOpCode);
-                                                                         
+    
     Steuerwerk.lbAdresse.setBounds(505, 105, 60, 30);
     Steuerwerk.lbAdresse.setText("Adresse");
     Steuerwerk.lbAdresse.setFont(new Font("Dialog", Font.PLAIN, 13));
@@ -207,12 +217,14 @@ public class FrmOMRAnw extends Frame {
     Speicherwerk.lbSR.setAlignment(Label.CENTER);
     Speicherwerk.lbSR.setFont(new Font("Dialog", Font.BOLD, 14));
     cp.add(Speicherwerk.lbSR);
+    Speicherwerk.tfSR.setFocusable(false);
     
     Speicherwerk.lbSAR.setBounds(735, 325, 32, 30);
     Speicherwerk.lbSAR.setText("SAR");
     Speicherwerk.lbSAR.setAlignment(Label.CENTER);
     Speicherwerk.lbSAR.setFont(new Font("Dialog", Font.BOLD, 14));
     cp.add(Speicherwerk.lbSAR);
+    Speicherwerk.tfSAR.setFocusable(false);
     
     IOWerk.tfeingabeRegister.setBounds(650, 432, 120, 30);
     IOWerk.tfeingabeRegister.setFont(new Font("Dialog", Font.PLAIN, 20));
@@ -221,8 +233,8 @@ public class FrmOMRAnw extends Frame {
     IOWerk.tfausgabeRegister.setBounds(800, 432, 120, 30);
     IOWerk.tfausgabeRegister.setFont(new Font("Dialog", Font.PLAIN, 20));
     IOWerk.tfausgabeRegister.setEditable(false);
-    IOWerk.tfausgabeRegister.setEnabled(true);
     cp.add(IOWerk.tfausgabeRegister);
+    IOWerk.tfausgabeRegister.setFocusable(false);
     
     IOWerk.lbEingaberegister.setBounds(650, 472, 120, 30);
     IOWerk.lbEingaberegister.setText("Eingaberegister");
@@ -249,12 +261,11 @@ public class FrmOMRAnw extends Frame {
     cp.add(IOWerk.lbAR);
     
     tfDekodierung.setBounds(320, 432, 275, 65);
-    tfDekodierung.setCaretPosition(0);
     tfDekodierung.setVisible(true);
-    tfDekodierung.setBackground(Color.WHITE);
     tfDekodierung.setEditable(false);
     tfDekodierung.setEnabled(true);
     cp.add(tfDekodierung);
+    tfDekodierung.setFocusable(false);
     
     lbDekodierung.setBounds(320, 395, 120, 30);
     lbDekodierung.setText("Dekodierung");
@@ -270,54 +281,64 @@ public class FrmOMRAnw extends Frame {
     setVisible(true);
     
   } // end of public VonNeumannProjekt
-  
+    
   // Anfang Methoden
-  
+    
   public static void main(String[] args) {
     new FrmOMRAnw();
   } // end of main
-  
+    
   /***************************** Anfang Hilfsmethoden *************************/
-  
+    
   public void reset(){
     Rechenwerk.reset();  
     Steuerwerk.reset();  
     Speicherwerk.reset();  
     IOWerk.reset(); 
   }
-  
+    
   /***************************** Ende Hilfsmethoden ***************************/
-  
+    
   /***************************** Anfang Ereignissteuerung *********************/
-  
+    
   public void rechnerStart(){
     btRechnerStart.setEnabled(false); // verhindert das man den "Rechner Start" Knopf mehrmals hintereinander drücken kann.
     btRechnerStopp.setEnabled(true);
     btZyklus.setEnabled(true);
     reset();
   }
-  
+    
   public void rechnerStopp(){
     btRechnerStart.setEnabled(true);                                                          
     btRechnerStopp.setEnabled(false);
     btZyklus.setEnabled(false);
+    btZyklus.setLabel("Befehl holen");
   }
-  
-
-  
+    
+    
+    
   public void mainZyklus(){
+    String Speicherinhalt;
     if(btZyklus.getLabel().equals("Befehl holen") == true){
       btZyklus.setLabel("Befehl Dekodieren");
       // BZR -> SAR
-      //zAdresse = Integer.parseInt(tfBZR.getText());
-      //Speicherwerk.SetSAR(zAdresse);
+      zAdresse = Integer.parseInt(Steuerwerk.tfBZR.getText());
+      Speicherwerk.SetSAR(zAdresse);
+      // Speicher SAR -> BR
+      Speicherwerk.SetSR("lesen", "");   // oder : "schreiben"
+      //Speicherinhalt = Speicherwerk.GetSR();
+      //Steuerwerk.SetBR(SpeicherInhalt);
+      Steuerwerk.IncrementBZR();
+      //Memdekodierung.clear ?
     }
     else{
-      
+      if(btZyklus.getLabel().equals("Befehl Dekodieren") == true){
+        
+      }
     } 
   } 
     
-    /***************************** Ende Ereignissteurung ************************/
+  /***************************** Ende Ereignissteurung ************************/
     
   public void btRechnerStart_ActionPerformed(ActionEvent evt) {
     rechnerStart();
@@ -329,9 +350,9 @@ public class FrmOMRAnw extends Frame {
     
   public void btZyklus_ActionPerformed(ActionEvent evt) {
     mainZyklus();
-  } // end of btZyklus_ActionPerformed
+  } // end of btZyklus_ActionPerformed 
     
-    // Ende Methoden
+  // Ende Methoden
     
 } // end of class VonNeumannProjekt
   

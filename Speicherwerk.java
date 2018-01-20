@@ -12,22 +12,34 @@ public class Speicherwerk{
   
   protected static TextArea taBefehlFenster = new TextArea("", 1, 1, TextArea.SCROLLBARS_VERTICAL_ONLY);
   
-  //Ende Attribute
+  static int i = 0;
   
-  /***************************** Anfang Hilfsmethoden *************************/
+  //Ende Attribute
   
   public static void reset(){
     tfSR.setText("???");
     tfSAR.setText("???");
+    
+    if(i == 0){
+      taBefehlFenster.append("000" + "\n" );
+      taBefehlFenster.append("001" + "\n" );
+      taBefehlFenster.append("002" + "\n" );
+      taBefehlFenster.append("003" + "\n" );
+      taBefehlFenster.append("004" + "\n" );
+      taBefehlFenster.append("005" + "\n" );
+      i = i +1;
+    }
   }
   
-  /***************************** Ende Hilfsmethoden ***************************/
-  
-  /*
   public static void SetSAR(int i){
     String str = "" + i + 0 + 0;
-    FrmOMRAnw.tfSAR.setText(str);
+    tfSAR.setText(str);
   }
-  */
+
+  public static void SetSR(String readwrite, String str){
+    if(readwrite.equals("lesen")){
+      
+    }
+  }
   
 }

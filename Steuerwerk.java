@@ -14,14 +14,19 @@ public class Steuerwerk{
   protected static Label lbAdresse = new Label();
   
   //Ende Attribute
-  
-  /***************************** Anfang Hilfsmethoden *************************/
-  
+   
   public static void reset(){
     tfBR.setText("???");
     tfBZR.setText("000");
   }
   
-  /***************************** Ende Hilfsmethoden ***************************/
+  public static void IncrementBZR(){
+    int NaechsterBefehl = 0;
+    String str = "";
+    NaechsterBefehl =  Integer.parseInt(lbBZR.getText() + 1 );
+    lbBZR.setText(str = str + NaechsterBefehl);
+  }
+  
+  
   
 }
