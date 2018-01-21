@@ -5,8 +5,8 @@ import java.awt.event.*;
   *
   * Beschreibung
   *
-  * @version 0.3 vom 06.01.2018
-  * @Lukas Rang
+  * @ version 0.3 vom 21.01.2018
+  * @ Lukas Rang
   */
 
 public class FrmOMRAnw extends Frame {
@@ -14,16 +14,17 @@ public class FrmOMRAnw extends Frame {
   // Anfang Attribute
   
   private String Datenbus;
-  private int Adressbus;
   private String zZyklus;
   private String zOpcode;
+  private String zAdressierung;
   private int zAdresse;
+  private int Adressbus;
    
   private Button btRechnerStart = new Button();
   private Button btRechnerStopp = new Button();
   private Button btZyklus = new Button();
   
-  private TextField tfDekodierung = new TextField();
+  private TextArea taDekodierung = new TextArea("", 1, 1, TextArea.SCROLLBARS_NONE);
   
   private Label lbDekodierung = new Label();
   
@@ -85,7 +86,7 @@ public class FrmOMRAnw extends Frame {
     btZyklus.setEnabled(false);
     cp.add(btZyklus);
     btZyklus.setFocusable(false);
-   
+    
     Rechenwerk.tfHR.setBounds(50, 70, 120, 30);
     Rechenwerk.tfHR.setFont(new Font("Dialog", Font.PLAIN, 20));
     Rechenwerk.tfHR.setEditable(false);
@@ -260,13 +261,6 @@ public class FrmOMRAnw extends Frame {
     IOWerk.lbAR.setAlignment(Label.CENTER);
     cp.add(IOWerk.lbAR);
     
-    tfDekodierung.setBounds(320, 432, 275, 65);
-    tfDekodierung.setVisible(true);
-    tfDekodierung.setEditable(false);
-    tfDekodierung.setEnabled(true);
-    cp.add(tfDekodierung);
-    tfDekodierung.setFocusable(false);
-    
     lbDekodierung.setBounds(320, 395, 120, 30);
     lbDekodierung.setText("Dekodierung");
     lbDekodierung.setAlignment(Label.CENTER);
@@ -274,8 +268,10 @@ public class FrmOMRAnw extends Frame {
     lbDekodierung.setEnabled(true);
     cp.add(lbDekodierung);
     
-    cp.setBackground(Color.WHITE);
-    
+    taDekodierung.setBounds(320, 432, 275, 65);
+    taDekodierung.setEditable(false);
+    taDekodierung.setEnabled(false);
+    cp.add(taDekodierung);
     // Ende Komponenten
     
     setVisible(true);
@@ -318,7 +314,7 @@ public class FrmOMRAnw extends Frame {
     
     
   public void mainZyklus(){
-    String Speicherinhalt;
+    String Speicherinhalt = "";
     if(btZyklus.getLabel().equals("Befehl holen") == true){
       btZyklus.setLabel("Befehl Dekodieren");
       // BZR -> SAR
@@ -329,14 +325,55 @@ public class FrmOMRAnw extends Frame {
       //Speicherinhalt = Speicherwerk.GetSR();
       //Steuerwerk.SetBR(SpeicherInhalt);
       Steuerwerk.IncrementBZR();
-      //Memdekodierung.clear ?
+      taDekodierung.setText(""); // MemDekodierung.Clear
     }
     else{
       if(btZyklus.getLabel().equals("Befehl Dekodieren") == true){
-        
+        btZyklus.setLabel("Befehl Ausführen");
+        //Speicherinhalt = Steuerwerk.GetBR();
+        // Datenbus ?
+        // Befehl
+        zOpcode = Speicherinhalt.substring(1, 4);
+      } // Adressierungsart + Adresse
+      if(zOpcode.charAt(4) == '_'){
+        zAdressierung = "absolut";
+        zAdresse = Integer.parseInt(Speicherinhalt.substring(5, Speicherinhalt.length()-4));
       }
-    } 
-  } 
+      else{
+        if(zOpcode.charAt(4) == '#'){
+          zAdressierung = "unmittelbar";
+          zAdresse = Integer.parseInt(Speicherinhalt.substring(5, Speicherinhalt.length()-4));
+        }
+        else{
+          if(zOpcode.charAt(4) == 'D' ||
+          zOpcode.charAt(4) == 'T' ||
+          zOpcode.charAt(4) == 'd' ||
+          zOpcode.charAt(4) == 't' ){
+            zAdressierung = "Register";
+            zAdresse = -1;
+          }
+          else{
+            if(zOpcode.charAt(4) == 'P' ||
+            zOpcode.charAt(4) == 'p' ){
+              zAdressierung = "Keine";
+              zAdresse = -1;
+            }
+            // Anzeige
+            taDekodierung.append("Befehl: " + zOpcode);
+            taDekodierung.append("Adressierung: " + zAdressierung);
+            if(zAdresse == -1){
+              taDekodierung.append("Adresse/Wert: ---");
+            }
+            else{
+              taDekodierung.append("Adresse/Wert: " + zAdresse);
+            }
+          }
+        }
+      }
+      
+    }
+  }
+ 
     
   /***************************** Ende Ereignissteurung ************************/
     

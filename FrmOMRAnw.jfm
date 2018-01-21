@@ -504,23 +504,6 @@ object FrmOMRAnw: TFGUIForm
     Alignment = CENTER
     Text = 'N'
   end
-  object tfDekodierung: TATextField
-    Tag = -2
-    Left = 320
-    Top = 432
-    Width = 275
-    Height = 65
-    Cursor = crIBeam
-    Hint = 'textField1'
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -12
-    Font.Name = 'Dialog'
-    Font.Style = []
-    Foreground = 3355443
-    Background = clBtnFace
-    Editable = False
-  end
   object lbDekodierung: TALabel
     Tag = -1
     Left = 320
@@ -588,5 +571,24 @@ object FrmOMRAnw: TFGUIForm
     Background = clBtnFace
     Alignment = CENTER
     Text = 'SAR'
+  end
+  object taDekodierung: TATextArea
+    Tag = -3
+    Left = 320
+    Top = 432
+    Width = 275
+    Height = 65
+    Cursor = crIBeam
+    Hint = 'textArea1'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Dialog'
+    Font.Style = []
+    Foreground = 3355443
+    Background = clBtnFace
+    Enabled = False
+    Scrollbars = NONE
+    Editable = False
   end
 end

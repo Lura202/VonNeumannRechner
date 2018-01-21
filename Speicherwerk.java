@@ -12,23 +12,11 @@ public class Speicherwerk{
   
   protected static TextArea taBefehlFenster = new TextArea("", 1, 1, TextArea.SCROLLBARS_VERTICAL_ONLY);
   
-  static int i = 0;
-  
   //Ende Attribute
   
   public static void reset(){
     tfSR.setText("???");
     tfSAR.setText("???");
-    
-    if(i == 0){
-      taBefehlFenster.append("000" + "\n" );
-      taBefehlFenster.append("001" + "\n" );
-      taBefehlFenster.append("002" + "\n" );
-      taBefehlFenster.append("003" + "\n" );
-      taBefehlFenster.append("004" + "\n" );
-      taBefehlFenster.append("005" + "\n" );
-      i = i +1;
-    }
   }
   
   public static void SetSAR(int i){
@@ -36,10 +24,28 @@ public class Speicherwerk{
     tfSAR.setText(str);
   }
 
-  public static void SetSR(String readwrite, String str){
+  public static void SetSR(String readwrite, String wert){
+    String inhalt;
+    int Speicherzelle = 0;
     if(readwrite.equals("lesen")){
       
     }
+    else{
+      if(readwrite.equals("schreiben")){
+        Speicherzelle = Integer.parseInt(lbSAR.getText());
+        wert = lbSR.getText();
+        //inhalt = 
+        
+      }
+      else{
+        lbSR.setText("???");
+      }
+    }
+  }
+  
+  public String GetSR(String str){
+    str = lbSR.getText(); 
+    return str;
   }
   
 }
