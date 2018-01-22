@@ -75,7 +75,7 @@ public class FrmOMRAnw extends Frame {
     btRechnerStopp.setFocusable(false);
     
     btZyklus.setBounds(160, 432, 145, 65);
-    btZyklus.setLabel("Befehl holen");
+    btZyklus.setLabel("Befehl Holen");
     btZyklus.addActionListener(new ActionListener() { 
     public void actionPerformed(ActionEvent evt) { 
     btZyklus_ActionPerformed(evt);
@@ -315,67 +315,108 @@ public class FrmOMRAnw extends Frame {
     
   public void mainZyklus(){
     String Speicherinhalt = "";
-    if(btZyklus.getLabel().equals("Befehl holen") == true){
+    if(btZyklus.getLabel().equals("Befehl Holen") == true){
       btZyklus.setLabel("Befehl Dekodieren");
       // BZR -> SAR
       zAdresse = Integer.parseInt(Steuerwerk.tfBZR.getText());
       Speicherwerk.SetSAR(zAdresse);
       // Speicher SAR -> BR
       Speicherwerk.SetSR("lesen", "");   // oder : "schreiben"
-      //Speicherinhalt = Speicherwerk.GetSR();
-      //Steuerwerk.SetBR(SpeicherInhalt);
+      Speicherinhalt = Speicherwerk.tfSR.getText();
+      Steuerwerk.tfBR.setText(Speicherinhalt);
       Steuerwerk.IncrementBZR();
       taDekodierung.setText(""); // MemDekodierung.Clear
     }
     else{
       if(btZyklus.getLabel().equals("Befehl Dekodieren") == true){
         btZyklus.setLabel("Befehl Ausführen");
-        //Speicherinhalt = Steuerwerk.GetBR();
+        Speicherinhalt = Steuerwerk.tfBR.getText();
         // Datenbus ?
         // Befehl
         zOpcode = Speicherinhalt.substring(1, 4);
-      } // Adressierungsart + Adresse
-      if(zOpcode.charAt(4) == '_'){
-        zAdressierung = "absolut";
-        zAdresse = Integer.parseInt(Speicherinhalt.substring(5, Speicherinhalt.length()-4));
-      }
-      else{
-        if(zOpcode.charAt(4) == '#'){
-          zAdressierung = "unmittelbar";
+        // Adressierungsart + Adresse
+        if(zOpcode.charAt(4) == '_'){
+          zAdressierung = "absolut";
           zAdresse = Integer.parseInt(Speicherinhalt.substring(5, Speicherinhalt.length()-4));
         }
         else{
-          if(zOpcode.charAt(4) == 'D' ||
-          zOpcode.charAt(4) == 'T' ||
-          zOpcode.charAt(4) == 'd' ||
-          zOpcode.charAt(4) == 't' ){
-            zAdressierung = "Register";
-            zAdresse = -1;
+          if(zOpcode.charAt(4) == '#'){
+            zAdressierung = "unmittelbar";
+            zAdresse = Integer.parseInt(Speicherinhalt.substring(5, Speicherinhalt.length()-4));
           }
           else{
-            if(zOpcode.charAt(4) == 'P' ||
-            zOpcode.charAt(4) == 'p' ){
-              zAdressierung = "Keine";
+            if(zOpcode.charAt(4) == 'D' ||
+            zOpcode.charAt(4) == 'T' ||
+            zOpcode.charAt(4) == 'd' ||
+            zOpcode.charAt(4) == 't' ){
+              zAdressierung = "Register";
               zAdresse = -1;
             }
-            // Anzeige
-            taDekodierung.append("Befehl: " + zOpcode);
-            taDekodierung.append("Adressierung: " + zAdressierung);
-            if(zAdresse == -1){
-              taDekodierung.append("Adresse/Wert: ---");
+            else{
+              if(zOpcode.charAt(4) == 'P' ||
+              zOpcode.charAt(4) == 'p' ){
+                zAdressierung = "Keine";
+                zAdresse = -1;
+              }
+              // Anzeige
+              taDekodierung.append("Befehl: " + zOpcode);
+              taDekodierung.append("Adressierung: " + zAdressierung);
+              if(zAdresse == -1){
+                taDekodierung.append("Adresse/Wert: ---");
+              }
+              else{
+                taDekodierung.append("Adresse/Wert: " + zAdresse);
+              }
+            }
+          }
+        } 
+      }
+      else{
+        btZyklus.setLabel("Befehl Holen");
+        //Befehl ausführen
+        if(zOpcode == "STOP"){                                          /*STOP*/
+          // Takt deaktivieren
+          rechnerStopp();
+        }
+        else{
+          if(zOpcode == "NOOP"){                                        /*NOOP*/
+            // NOOP = No Operation
+          }
+          else{
+            if(zOpcode == "READ"){                                      /*READ*/
+              Rechenwerk.tfAkku.setText(IOWerk.tfeingabeRegister.getText());
             }
             else{
-              taDekodierung.append("Adresse/Wert: " + zAdresse);
+              if(zOpcode == "WRIT"){                                    /*WRIT*/
+                IOWerk.tfausgabeRegister.setText(Rechenwerk.lbAkku.getText());
+              }
+              else{
+                if(zOpcode == "LDA_"){                                  /*LDA_*/
+                  Speicherwerk.tfSAR.setText("" + zAdresse);
+                  Speicherwerk.SetSR("lesen", "");
+                  Datenbus = Speicherwerk.tfSR.getText();
+                  Rechenwerk.tfAkku.setText(Datenbus);
+                }
+                else{
+                  if(zOpcode == "LDA#"){
+                    Rechenwerk.tfAkku.setText("" + zAdresse);
+                  }
+                  else{
+                    if(zOpcode == "STO_"){
+                      Speicherwerk.tfSAR.setText("" + zAdresse);
+                      Speicherwerk.SetSR("schreiben", Rechenwerk.tfAkku.getText());
+                    }
+                  }
+                }
+              }
             }
           }
         }
       }
-      
     }
   }
- 
     
-  /***************************** Ende Ereignissteurung ************************/
+    /***************************** Ende Ereignissteurung ************************/
     
   public void btRechnerStart_ActionPerformed(ActionEvent evt) {
     rechnerStart();
@@ -389,7 +430,7 @@ public class FrmOMRAnw extends Frame {
     mainZyklus();
   } // end of btZyklus_ActionPerformed 
     
-  // Ende Methoden
+    // Ende Methoden
     
 } // end of class VonNeumannProjekt
   

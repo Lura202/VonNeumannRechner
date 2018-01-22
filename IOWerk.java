@@ -15,8 +15,8 @@ public class IOWerk{
   //Ende Attribute
   
   public static void reset(){
-    tfeingabeRegister.setText("0");
-    tfausgabeRegister.setText("0");
+    tfeingabeRegister.setText("");
+    tfausgabeRegister.setText("???");
   }
    
 }

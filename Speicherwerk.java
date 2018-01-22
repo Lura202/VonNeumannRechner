@@ -43,9 +43,4 @@ public class Speicherwerk{
     }
   }
   
-  public String GetSR(String str){
-    str = lbSR.getText(); 
-    return str;
-  }
-  
 }
