@@ -18,5 +18,19 @@ public class IOWerk{
     tfeingabeRegister.setText("");
     tfausgabeRegister.setText("???");
   }
+  
+  public static void SetAR(int Wert){
+    tfausgabeRegister.setText("" + Wert);
+  }
+  
+  public static void SetER(int Wert){
+    tfeingabeRegister.setText("" + Wert);
+  }
+  
+  public static int GetER(){
+    String Eingabe;
+    Eingabe = tfeingabeRegister.getText();
+    return Integer.parseInt(Eingabe);
+  }
    
 }

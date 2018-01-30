@@ -20,13 +20,27 @@ public class Steuerwerk{
     tfBZR.setText("000");
   }
   
-  public static void IncrementBZR(){
-    int NaechsterBefehl = 0;
-    String str = "";
-    NaechsterBefehl =  Integer.parseInt(lbBZR.getText() + 1 );
-    lbBZR.setText(str = str + NaechsterBefehl);
+  public static void SetBR(String Befehl){
+    // Speicheradresse herausfiltern
+    tfBR.setText(Befehl);
   }
   
+  public static void SetBZR(int Adresse){
+    tfBZR.setText("" + Adresse);
+  }
   
+  public static String GetBR(){
+    return tfBR.getText();
+  }
+  
+  public static int GetBZR(){
+    return Integer.parseInt(tfBZR.getText());
+  }
+  
+  public static void IncrementBZR(){
+    int NaechsterBefehl;
+    NaechsterBefehl = (Integer.parseInt(tfBZR.getText()) + 1) % 256;
+    tfBZR.setText("0" + NaechsterBefehl);
+  }
   
 }

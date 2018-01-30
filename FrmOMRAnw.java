@@ -5,7 +5,7 @@ import java.awt.event.*;
   *
   * Beschreibung
   *
-  * @ version 0.3 vom 21.01.2018
+  * @ version 0.5 vom 21.01.2018
   * @ Lukas Rang
   */
 
@@ -36,7 +36,7 @@ public class FrmOMRAnw extends Frame {
     addWindowListener(new WindowAdapter() {
     public void windowClosing(WindowEvent evt) { dispose(); }
     });
-    int frameWidth = 950; 
+    int frameWidth = 960; 
     int frameHeight = 600;
     setSize(frameWidth, frameHeight);
     Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
@@ -108,19 +108,19 @@ public class FrmOMRAnw extends Frame {
     cp.add(Rechenwerk.tfALU);
     Rechenwerk.tfALU.setFocusable(false);
     
-    Rechenwerk.tfN.setBounds(65, 190, 30, 30);
-    Rechenwerk.tfN.setFont(new Font("Dialog", Font.PLAIN, 20));
-    Rechenwerk.tfN.setEnabled(true);
-    Rechenwerk.tfN.setEditable(false);
-    cp.add(Rechenwerk.tfN);
-    Rechenwerk.tfN.setFocusable(false);
+    Rechenwerk.tfNegativeFlag.setBounds(65, 190, 30, 30);
+    Rechenwerk.tfNegativeFlag.setFont(new Font("Dialog", Font.PLAIN, 20));
+    Rechenwerk.tfNegativeFlag.setEnabled(true);
+    Rechenwerk.tfNegativeFlag.setEditable(false);
+    cp.add(Rechenwerk.tfNegativeFlag);
+    Rechenwerk.tfNegativeFlag.setFocusable(false);
     
-    Rechenwerk.tfZ.setBounds(30, 190, 30, 30);
-    Rechenwerk.tfZ.setFont(new Font("Dialog", Font.PLAIN, 20));
-    Rechenwerk.tfZ.setEditable(false);
-    Rechenwerk.tfZ.setEnabled(true);
-    cp.add(Rechenwerk.tfZ);
-    Rechenwerk.tfZ.setFocusable(false);
+    Rechenwerk.tfZeroFlag.setBounds(30, 190, 30, 30);
+    Rechenwerk.tfZeroFlag.setFont(new Font("Dialog", Font.PLAIN, 20));
+    Rechenwerk.tfZeroFlag.setEditable(false);
+    Rechenwerk.tfZeroFlag.setEnabled(true);
+    cp.add(Rechenwerk.tfZeroFlag);
+    Rechenwerk.tfZeroFlag.setFocusable(false);
     
     Rechenwerk.lbHR.setBounds(50, 35, 72, 30);
     Rechenwerk.lbHR.setText("HR");
@@ -140,17 +140,17 @@ public class FrmOMRAnw extends Frame {
     Rechenwerk.lbALU.setAlignment(Label.CENTER);
     cp.add(Rechenwerk.lbALU);
     
-    Rechenwerk.lbZ.setBounds(30, 155, 30, 30);
-    Rechenwerk.lbZ.setText("Z");
-    Rechenwerk.lbZ.setAlignment(Label.CENTER);
-    Rechenwerk.lbZ.setFont(new Font("Dialog", Font.BOLD, 14));
-    cp.add(Rechenwerk.lbZ);
+    Rechenwerk.lbZeroFlag.setBounds(30, 155, 30, 30);
+    Rechenwerk.lbZeroFlag.setText("Z");
+    Rechenwerk.lbZeroFlag.setAlignment(Label.CENTER);
+    Rechenwerk.lbZeroFlag.setFont(new Font("Dialog", Font.BOLD, 14));
+    cp.add(Rechenwerk.lbZeroFlag);
     
-    Rechenwerk.lbN.setBounds(65, 155, 30, 30);
-    Rechenwerk.lbN.setText("N");
-    Rechenwerk.lbN.setAlignment(Label.CENTER);
-    Rechenwerk.lbN.setFont(new Font("Dialog", Font.BOLD, 14));
-    cp.add(Rechenwerk.lbN);
+    Rechenwerk.lbNegativeFlag.setBounds(65, 155, 30, 30);
+    Rechenwerk.lbNegativeFlag.setText("N");
+    Rechenwerk.lbNegativeFlag.setAlignment(Label.CENTER);
+    Rechenwerk.lbNegativeFlag.setFont(new Font("Dialog", Font.BOLD, 14));
+    cp.add(Rechenwerk.lbNegativeFlag);
     
     Steuerwerk.tfBR.setBounds(384, 70, 185, 30);
     Steuerwerk.tfBR.setFont(new Font("Dialog", Font.PLAIN, 20));
@@ -272,6 +272,7 @@ public class FrmOMRAnw extends Frame {
     taDekodierung.setEditable(false);
     taDekodierung.setEnabled(false);
     cp.add(taDekodierung);
+    
     // Ende Komponenten
     
     setVisible(true);
@@ -308,7 +309,7 @@ public class FrmOMRAnw extends Frame {
     btRechnerStart.setEnabled(true);                                                          
     btRechnerStopp.setEnabled(false);
     btZyklus.setEnabled(false);
-    btZyklus.setLabel("Befehl holen");
+    btZyklus.setLabel("Befehl Holen");
   }
     
     
@@ -318,8 +319,8 @@ public class FrmOMRAnw extends Frame {
     if(btZyklus.getLabel().equals("Befehl Holen") == true){
       btZyklus.setLabel("Befehl Dekodieren");
       // BZR -> SAR
-      zAdresse = Integer.parseInt(Steuerwerk.tfBZR.getText());
-      Speicherwerk.SetSAR(zAdresse);
+      zAdresse = Steuerwerk.GetBZR();
+      Speicherwerk.SetSAR(zAdresse);;
       // Speicher SAR -> BR
       Speicherwerk.SetSR("lesen", "");   // oder : "schreiben"
       Speicherinhalt = Speicherwerk.tfSR.getText();
@@ -331,7 +332,7 @@ public class FrmOMRAnw extends Frame {
       if(btZyklus.getLabel().equals("Befehl Dekodieren") == true){
         btZyklus.setLabel("Befehl Ausführen");
         Speicherinhalt = Steuerwerk.tfBR.getText();
-        // Datenbus ?
+        // Datenbus ?                                          
         // Befehl
         zOpcode = Speicherinhalt.substring(1, 4);
         // Adressierungsart + Adresse
@@ -398,39 +399,126 @@ public class FrmOMRAnw extends Frame {
                   Rechenwerk.tfAkku.setText(Datenbus);
                 }
                 else{
-                  if(zOpcode == "LDA#"){
+                  if(zOpcode == "LDA#"){                                /*LDA#*/
                     Rechenwerk.tfAkku.setText("" + zAdresse);
                   }
                   else{
-                    if(zOpcode == "STO_"){
+                    if(zOpcode == "STO_"){                              /*STO_*/
                       Speicherwerk.tfSAR.setText("" + zAdresse);
                       Speicherwerk.SetSR("schreiben", Rechenwerk.tfAkku.getText());
+                    }
+                    else{
+                      if(zOpcode == "ADD_"){                            /*ADD_*/
+                        Speicherwerk.SetSAR(zAdresse);
+                        Speicherwerk.SetSR("lesen","");
+                        Datenbus = Speicherwerk.tfSR.getText();
+                        Rechenwerk.tfHR.setText(Datenbus);
+                        Rechenwerk.tfALU.setText("+");
+                        Rechenwerk.tfAkku.setText(Rechenwerk.tfALU.getText());
+                      }
+                      else{                                             /*SUB_*/
+                        if(zOpcode == "SUB_"){
+                          Speicherwerk.SetSAR(zAdresse);
+                          Speicherwerk.SetSR("lesen", "");
+                          Datenbus = Speicherwerk.tfSR.getText();
+                          Rechenwerk.tfHR.setText(Datenbus);
+                          Rechenwerk.tfALU.setText("-");
+                          Rechenwerk.tfAkku.setText(Rechenwerk.tfALU.getText());
+                        }
+                        else{
+                          if(zOpcode == "MUL_"){                        /*MUL_*/
+                            Speicherwerk.SetSAR(zAdresse);
+                            Speicherwerk.SetSR("lesen", "");
+                            Datenbus = Speicherwerk.tfSR.getText();
+                            Rechenwerk.tfHR.setText(Datenbus);
+                            Rechenwerk.tfALU.setText("*");
+                            Rechenwerk.tfAkku.setText(Rechenwerk.tfALU.getText());
+                          }
+                          else{
+                            if(zOpcode == "DIV_"){                      /*DIV_*/
+                              Speicherwerk.SetSAR(zAdresse);
+                              Speicherwerk.SetSR("lesen", "");
+                              Datenbus = Speicherwerk.tfSR.getText();
+                              Rechenwerk.tfHR.setText(Datenbus);
+                              Rechenwerk.tfALU.setText("/");
+                              Rechenwerk.tfAkku.setText(Rechenwerk.tfALU.getText());
+                            }
+                            else{
+                              if(zOpcode == "MOD_"){                    /*MOD_*/
+                                Speicherwerk.SetSAR(zAdresse);
+                                Speicherwerk.SetSR("lesen", "");
+                                Datenbus = Speicherwerk.tfSR.getText();
+                                Rechenwerk.tfHR.setText(Datenbus);
+                                Rechenwerk.tfALU.setText("mod");
+                                Rechenwerk.tfAkku.setText(Rechenwerk.tfALU.getText());
+                              }
+                              else{
+                                if(zOpcode == "JMP_"){                  /*JMP_*/
+                                  Steuerwerk.tfBZR.setText("" + zAdresse);
+                                }
+                                else{
+                                  if(zOpcode == "CMP_"){                /*CMP_*/
+                                    Speicherwerk.SetSAR(zAdresse);
+                                    Speicherwerk.SetSR("lesen", "");
+                                    Datenbus = Speicherwerk.tfSR.getText();
+                                    Rechenwerk.tfHR.setText(Datenbus);
+                                    Rechenwerk.tfALU.setText("-");
+                                    // Rechenwerk.tfAkku.setText(Rechenwerk.nfALU.getText());                                    
+                                  } 
+                                  else{
+                                    if(zOpcode == "BZE_"){              /*BZE_*/
+                                      if(Rechenwerk.GetZeroFlag() == 1){
+                                        Steuerwerk.SetBZR(zAdresse);
+                                      }
+                                    }
+                                    else{
+                                      if(zOpcode == "BPL_"){
+                                        if(Rechenwerk.GetZeroFlag() == 1 && Rechenwerk.GetNegativeFlag() == 0 ){
+                                          Steuerwerk.SetBZR(zAdresse);
+                                        }
+                                      }
+                                      else{
+                                        if(zOpcode == "BNE_"){
+                                          if(Rechenwerk.GetNegativeFlag() == 1){
+                                            Steuerwerk.SetBZR(zAdresse);     
+                                          }       
+                                        }                                      
+                                      }
+                                    }
+                                  }                                            
+                                }
+                              }                                                 
+                            }
+                          }                                                       
+                        }                                                     
+                      }                                                          
                     }
                   }
                 }
               }
-            }
+            }                                                                   
           }
         }
       }
     }
   }
-    
-    /***************************** Ende Ereignissteurung ************************/
-    
+
+      
+      /***************************** Ende Ereignissteurung ************************/
+      
   public void btRechnerStart_ActionPerformed(ActionEvent evt) {
     rechnerStart();
   } // end of btRechnerStart_ActionPerformed
-    
+      
   public void btRechnerStopp_ActionPerformed(ActionEvent evt) {
     rechnerStopp();
   } // end of btRechnerStopp_ActionPerformed
-    
+      
   public void btZyklus_ActionPerformed(ActionEvent evt) {
     mainZyklus();
   } // end of btZyklus_ActionPerformed 
-    
-    // Ende Methoden
-    
+      
+      // Ende Methoden
+      
 } // end of class VonNeumannProjekt
-  
+    

@@ -25,16 +25,18 @@ public class Speicherwerk{
   }
 
   public static void SetSR(String readwrite, String wert){
-    String inhalt;
+    String Inhalt;
     int Speicherzelle = 0;
     if(readwrite.equals("lesen")){
-      
+      //Inhalt = taBefehlFenster.getText().split("\\n");
+      // Speicheradresse herausfiltern
+      //tfSR.setText();
     }
     else{
       if(readwrite.equals("schreiben")){
         Speicherzelle = Integer.parseInt(lbSAR.getText());
         wert = lbSR.getText();
-        //inhalt = 
+        //Inhalt = 
         
       }
       else{
