@@ -45,4 +45,9 @@ public class Speicherwerk{
     }
   }
   
+  public static String GetSR(){
+    String str = tfSR.getText();
+    return str;
+  }
+  
 }

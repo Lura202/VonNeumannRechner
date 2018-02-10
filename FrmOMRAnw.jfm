@@ -4,7 +4,7 @@ object FrmOMRAnw: TFGUIForm
   BorderIcons = [biSystemMenu]
   Caption = 'Modellrechner OMR 1.0 (Java)'
   ClientHeight = 561
-  ClientWidth = 934
+  ClientWidth = 935
   Color = clWhite
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -16,7 +16,6 @@ object FrmOMRAnw: TFGUIForm
   Position = poDesigned
   ShowHint = True
   Visible = True
-  WindowState = wsMaximized
   OnClose = FormClose
   OnCloseQuery = FormCloseQuery
   OnResize = FormResize
@@ -29,7 +28,7 @@ object FrmOMRAnw: TFGUIForm
   object btRechnerStart: TAButton
     Tag = -4
     Left = 25
-    Top = 432
+    Top = 456
     Width = 120
     Height = 30
     Hint = 'button1'
@@ -80,7 +79,7 @@ object FrmOMRAnw: TFGUIForm
   object tfeingabeRegister: TATextField
     Tag = -2
     Left = 650
-    Top = 432
+    Top = 456
     Width = 120
     Height = 30
     Cursor = crIBeam
@@ -97,7 +96,7 @@ object FrmOMRAnw: TFGUIForm
   object tfausgabeRegister: TATextField
     Tag = -2
     Left = 800
-    Top = 432
+    Top = 456
     Width = 120
     Height = 30
     Cursor = crIBeam
@@ -148,7 +147,7 @@ object FrmOMRAnw: TFGUIForm
   object btRechnerStopp: TAButton
     Tag = -4
     Left = 25
-    Top = 467
+    Top = 491
     Width = 120
     Height = 30
     Hint = 'button1'
@@ -166,7 +165,7 @@ object FrmOMRAnw: TFGUIForm
   object btZyklus: TAButton
     Tag = -4
     Left = 160
-    Top = 432
+    Top = 456
     Width = 145
     Height = 65
     Hint = 'button1'
@@ -236,7 +235,7 @@ object FrmOMRAnw: TFGUIForm
   object lbEingaberegister: TALabel
     Tag = -1
     Left = 650
-    Top = 472
+    Top = 496
     Width = 120
     Height = 30
     Hint = 'label3'
@@ -253,7 +252,7 @@ object FrmOMRAnw: TFGUIForm
   object lbAusgaberegister: TALabel
     Tag = -1
     Left = 800
-    Top = 470
+    Top = 494
     Width = 120
     Height = 30
     Hint = 'label4'
@@ -270,7 +269,7 @@ object FrmOMRAnw: TFGUIForm
   object lbER: TALabel
     Tag = -1
     Left = 650
-    Top = 397
+    Top = 421
     Width = 30
     Height = 30
     Hint = 'label5'
@@ -287,7 +286,7 @@ object FrmOMRAnw: TFGUIForm
   object lbAR: TALabel
     Tag = -1
     Left = 800
-    Top = 397
+    Top = 421
     Width = 30
     Height = 30
     Hint = 'label6'
@@ -399,7 +398,7 @@ object FrmOMRAnw: TFGUIForm
     Font.Name = 'Dialog'
     Font.Style = [fsBold]
     Foreground = clWindowText
-    Background = clBtnFace
+    Background = clYellow
     Alignment = CENTER
     Text = 'Z'
   end
@@ -423,7 +422,7 @@ object FrmOMRAnw: TFGUIForm
   object lbDekodierung: TALabel
     Tag = -1
     Left = 320
-    Top = 395
+    Top = 419
     Width = 120
     Height = 30
     Hint = 'label3'
@@ -491,7 +490,7 @@ object FrmOMRAnw: TFGUIForm
   object taDekodierung: TATextArea
     Tag = -3
     Left = 320
-    Top = 432
+    Top = 456
     Width = 275
     Height = 65
     Cursor = crIBeam
