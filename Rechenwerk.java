@@ -1,6 +1,6 @@
 import java.awt.*;
 
-public class Rechenwerk{
+public class Rechenwerk {
   
   //Anfang Attribute
   

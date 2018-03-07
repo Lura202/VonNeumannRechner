@@ -14,14 +14,13 @@ public class Steuerwerk{
   protected static Label lbAdresse = new Label();
   
   //Ende Attribute
-   
+    
   public static void reset(){
     tfBR.setText("???");
     tfBZR.setText("000");
   }
   
   public static void SetBR(String Befehl){
-    // Speicheradresse herausfiltern
     tfBR.setText(Befehl);
   }
   
@@ -38,9 +37,11 @@ public class Steuerwerk{
   }
   
   public static void IncrementBZR(){
-    int NaechsterBefehl;
-    NaechsterBefehl = (Integer.parseInt(tfBZR.getText()) + 1) % 256;
-    tfBZR.setText("0" + NaechsterBefehl);
+    String str = "";
+    for (int i = 0; i < 256; i = i+1) {
+      str = Speicherwerk.getBefehl(i);
+    }
+    tfBZR.setText(str.substring(0,3)); 
   }
-  
+    
 }

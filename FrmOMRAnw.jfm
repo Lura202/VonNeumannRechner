@@ -3,8 +3,8 @@ object FrmOMRAnw: TFGUIForm
   Top = 0
   BorderIcons = [biSystemMenu]
   Caption = 'Modellrechner OMR 1.0 (Java)'
-  ClientHeight = 561
-  ClientWidth = 935
+  ClientHeight = 608
+  ClientWidth = 944
   Color = clWhite
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -188,14 +188,19 @@ object FrmOMRAnw: TFGUIForm
     Height = 207
     Cursor = crIBeam
     Hint = 'textArea1'
-    Font.Charset = DEFAULT_CHARSET
+    Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
     Font.Height = -20
-    Font.Name = 'Dialog'
+    Font.Name = 'Courier New'
     Font.Style = []
     Foreground = clWindowText
     Background = clWhite
     Scrollbars = VERTICAL_ONLY
+    Text.Strings = (
+      '000 READ'
+      '001 WRIT'
+      '002 STOP'
+      '5')
     Editable = True
   end
   object lbHR: TALabel
@@ -590,5 +595,22 @@ object FrmOMRAnw: TFGUIForm
     Foreground = clWindowText
     Background = clWhite
     Editable = False
+  end
+  object tferror: TATextField
+    Tag = -2
+    Left = 321
+    Top = 530
+    Width = 275
+    Height = 35
+    Cursor = crIBeam
+    Hint = 'textField1'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -14
+    Font.Name = 'Courier'
+    Font.Style = [fsBold]
+    Foreground = clWindowText
+    Background = clWhite
+    Editable = True
   end
 end
